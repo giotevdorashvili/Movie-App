@@ -2,7 +2,6 @@ import React from 'react';
 import {
   NativeStackScreenProps,
   createNativeStackNavigator,
-  NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 
 import Home from '../screens/Home';
@@ -12,13 +11,11 @@ import Search from '../screens/Search';
 export type ScreenProps<T extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, T>;
 
-type RootStackParamList = {
+export type RootStackParamList = {
   Home: undefined;
   MovieDetails: {};
   Search: {};
 };
-
-export type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
