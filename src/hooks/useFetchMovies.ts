@@ -11,7 +11,7 @@ const options = {
 };
 
 const useFetchMovies = () => {
-  const [response, setResponse] = useState<MovieTypes>();
+  const [response, setResponse] = useState<ResponseTypes>();
   const [isLoading, setIsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
 
@@ -20,7 +20,7 @@ const useFetchMovies = () => {
       try {
         setIsLoading(true);
 
-        const res = await axios.request<MovieTypes>(options);
+        const res = await axios.request<ResponseTypes>(options);
 
         if (!res.data) {
           throw new Error('fetching upcoming movies failed.');
@@ -42,27 +42,29 @@ const useFetchMovies = () => {
 export default useFetchMovies;
 
 interface MovieTypes {
+  adult: boolean;
+  backdrop_path: string;
+  genre_ids: number[];
+  id: number;
+  original_language: string;
+  original_title: string;
+  overview: string;
+  popularity: number;
+  poster_path: string;
+  release_date: string;
+  title: string;
+  video: boolean;
+  vote_average: number;
+  vote_count: number;
+}
+
+interface ResponseTypes {
   dates: {
     maximum: string;
     minimum: string;
   };
   page: number;
-  results: {
-    adult: boolean;
-    backdrop_path: string;
-    genre_ids: number[];
-    id: number;
-    original_language: string;
-    original_title: string;
-    overview: string;
-    popularity: number;
-    poster_path: string;
-    release_date: string;
-    title: string;
-    video: boolean;
-    vote_average: number;
-    vote_count: number;
-  }[];
+  results: MovieTypes[];
   total_pages: number;
   total_results: number;
 }
