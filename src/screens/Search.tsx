@@ -1,15 +1,21 @@
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-import {ScreenProps} from '../stackNavigator/StackNavigator';
+import {ScreenProps} from '../navigators/StackNavigator';
 
 const Search: React.FC<ScreenProps<'Search'>> = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       <Text>Search</Text>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export default Search;

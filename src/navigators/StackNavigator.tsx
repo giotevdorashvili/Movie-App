@@ -2,6 +2,7 @@ import React from 'react';
 import {
   NativeStackScreenProps,
   createNativeStackNavigator,
+  NativeStackNavigationProp,
 } from '@react-navigation/native-stack';
 
 import Home from '../screens/Home';
@@ -16,6 +17,8 @@ type RootStackParamList = {
   MovieDetails: {};
   Search: {};
 };
+
+export type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
