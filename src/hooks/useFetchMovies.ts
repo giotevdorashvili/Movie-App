@@ -65,9 +65,9 @@ interface GenericMoviesList {
   total_results: number;
 }
 
-interface UpcomingMoviesList extends GenericMoviesList {
-  dates: {
-    maximum: string;
-    minimum: string;
-  };
-}
+//  interface UpcomingMoviesList extends GenericMoviesList {
+//   dates: {
+//     maximum: string;
+//     minimum: string;
+//   };
+// }
