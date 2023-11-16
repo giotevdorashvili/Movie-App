@@ -1,5 +1,6 @@
 import React from 'react';
-import {StyleSheet, FlatList, Text} from 'react-native';
+import {StyleSheet, FlatList} from 'react-native';
+import {Text} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 import useFetchUpcoming from '../hooks/services/useFetchUpcoming';

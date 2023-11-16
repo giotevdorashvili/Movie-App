@@ -7,6 +7,7 @@ import {
 import Home from '../screens/Home';
 import MovieDetails from '../screens/MovieDetails';
 import Search from '../screens/Search';
+import {useThemeColors} from '../theme/theme';
 
 export type ScreenProps<T extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, T>;
@@ -20,8 +21,15 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const StackNavigator = () => {
+  const {background} = useThemeColors();
+
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: background,
+        },
+      }}>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="MovieDetails" component={MovieDetails} />
       <Stack.Screen name="Search" component={Search} />
