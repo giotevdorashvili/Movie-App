@@ -1,24 +1,25 @@
 import React from 'react';
-import {Text, StyleSheet, FlatList} from 'react-native';
+import {StyleSheet, FlatList, Text} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
+import useFetchUpcoming from '../hooks/services/useFetchUpcoming';
 import {ScreenProps} from '../navigators/StackNavigator';
-import useFetchMovies from '../hooks/useFetchMovies';
 
 const Home: React.FC<ScreenProps<'Home'>> = () => {
-  const {response, isLoading, hasError} = useFetchMovies();
+  const {data, isLoading, isError} = useFetchUpcoming();
 
   if (isLoading) {
     return <Text>Loading...</Text>;
   }
-  if (hasError) {
+
+  if (isError) {
     return <Text>Something went wrong</Text>;
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={response?.results}
+        data={data?.results}
         renderItem={({item}) => <Text> {item.title}</Text>}
         keyExtractor={item => item.id.toString()}
       />
