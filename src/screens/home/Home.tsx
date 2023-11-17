@@ -9,9 +9,9 @@ const Home: React.FC<ScreenProps<'Home'>> = () => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
-        <MoviesList listName="upcoming" />
-        <MoviesList listName="popular" />
-        <MoviesList listName="topRated" />
+        <MoviesList listName="upcoming" title="Upcoming" />
+        <MoviesList listName="popular" title="Popular" />
+        <MoviesList listName="topRated" title="Top Rated" />
       </ScrollView>
     </SafeAreaView>
   );

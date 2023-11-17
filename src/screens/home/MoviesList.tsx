@@ -5,23 +5,19 @@ import {Text, Button, ActivityIndicator} from 'react-native-paper';
 import useMovieList from '../../hooks/services/useMovieList';
 import PressableCover from '../../components/PressableCover';
 import {ListNameLiterals} from '../../hooks/services/types';
+import {MovieLists} from './types';
 
-const MoviesList = ({listName}: {listName: ListNameLiterals}) => {
-  const {height} = useWindowDimensions();
+const MoviesList = ({listName, title}: MovieLists) => {
   const {data, isLoading, isError} = useMovieList(listName);
 
-  let title = listName[0].toUpperCase() + listName.slice(1);
+  const {height} = useWindowDimensions();
 
-  if (title === 'TopRated') {
-    title = 'Top Rated';
-  }
-
-  const activityIndicatorStyle = {height: height / 4};
+  const styles = getStyles(height / 4);
 
   const handleSeeAllPress = () => {};
 
   if (isLoading) {
-    return <ActivityIndicator style={activityIndicatorStyle} />;
+    return <ActivityIndicator style={styles.activityIndicator} />;
   }
 
   if (isError) {
@@ -51,24 +47,29 @@ const MoviesList = ({listName}: {listName: ListNameLiterals}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginBottom: 20,
-  },
-  sectionDescriptionContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  title: {
-    fontSize: 25,
-    fontWeight: '600',
-  },
-  seeAll: {
-    fontSize: 16,
-  },
-});
+const getStyles = (height: number) => {
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      marginBottom: 20,
+    },
+    sectionDescriptionContainer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: 20,
+    },
+    title: {
+      fontSize: 25,
+      fontWeight: '600',
+    },
+    seeAll: {
+      fontSize: 16,
+    },
+    activityIndicator: {
+      height,
+    },
+  });
+};
 
 export default MoviesList;
