@@ -4,16 +4,9 @@ import {Text, Button, ActivityIndicator} from 'react-native-paper';
 
 import useMovieList from '../../hooks/services/useMovieList';
 import PressableCover from '../../components/PressableCover';
-import {ListNameLiterals} from '../../hooks/services/types';
-// import { MovieLists } from './types';
+import {MovieLists} from './types';
 
-const MoviesList = ({
-  listName,
-  title,
-}: {
-  listName: ListNameLiterals;
-  title: string;
-}) => {
+const MoviesList = ({listName, title}: MovieLists) => {
   const {data, isLoading, isError} = useMovieList(listName);
 
   const {height} = useWindowDimensions();
