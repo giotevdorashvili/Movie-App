@@ -1,14 +1,14 @@
 import React from 'react';
-import {StyleSheet, FlatList, View} from 'react-native';
+import {FlatList, View, StyleSheet} from 'react-native';
 import {Text, Button} from 'react-native-paper';
-import {SafeAreaView} from 'react-native-safe-area-context';
 
-import useFetchUpcoming from '../hooks/services/useFetchUpcoming';
-import {ScreenProps} from '../navigators/StackNavigator';
-import PressableCover from '../components/PressableCover';
+import useMovieList from '../../hooks/services/useMovieList';
+import PressableCover from '../../components/PressableCover';
 
-const Home: React.FC<ScreenProps<'Home'>> = () => {
-  const {data, isLoading, isError} = useFetchUpcoming();
+const MoviesList = ({listName}: {listName: string}) => {
+  const {data, isLoading, isError} = useMovieList(listName);
+
+  const title = listName[0].toUpperCase() + listName.slice(1);
 
   const handleSeeAllPress = () => {};
 
@@ -21,9 +21,10 @@ const Home: React.FC<ScreenProps<'Home'>> = () => {
   }
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View>
       <View style={styles.sectionDescriptionContainer}>
-        <Text style={styles.title}>Upcoming</Text>
+        <Text style={styles.title}>{title}</Text>
+
         <Button
           onPress={handleSeeAllPress}
           labelStyle={styles.seeAll}
@@ -40,7 +41,7 @@ const Home: React.FC<ScreenProps<'Home'>> = () => {
         )}
         keyExtractor={item => item.id.toString()}
       />
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -49,6 +50,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 30,
     paddingHorizontal: 25,
+    gap: 10,
   },
   sectionDescriptionContainer: {
     flexDirection: 'row',
@@ -65,4 +67,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default MoviesList;

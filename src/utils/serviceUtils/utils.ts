@@ -10,13 +10,13 @@ export const axiosInstance = axios.create({
   },
 });
 
-export const queryKeysMap = {
+export const queryKeysMap: Record<string, string> = {
   upcoming: 'upcoming',
   popular: 'popular',
   topRated: 'top_rated',
 };
 
-export const axiosUrlsMap = {
+export const axiosUrlsMap: Record<string, string> = {
   upcoming: 'movie/upcoming',
   popular: 'movie/popular',
   topRated: 'movie/top_rated',
