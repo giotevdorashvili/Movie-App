@@ -1,17 +1,18 @@
 import {useQuery} from '@tanstack/react-query';
-import axios from 'axios';
 
-import {getOptions} from '../utils';
-import {UpcomingMoviesList} from '../types';
+import {
+  axiosInstance,
+  queryKeysMap,
+  axiosUrlsMap,
+} from '../../utils/serviceUtils/utils';
+import {UpcomingMoviesList} from './types';
 
 const useFetchUpcoming = () => {
-  const {data, isLoading, isError} = useQuery({
-    queryKey: ['upcoming'],
+  return useQuery({
+    queryKey: [queryKeysMap.upcoming],
     queryFn: async () =>
-      await axios.request<UpcomingMoviesList>(getOptions('upcoming')),
+      await axiosInstance.get<UpcomingMoviesList>(axiosUrlsMap.upcoming),
   });
-
-  return {data: data?.data, isLoading, isError};
 };
 
 export default useFetchUpcoming;

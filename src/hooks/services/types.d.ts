@@ -1,4 +1,4 @@
-interface SingleMovie {
+export interface SingleMovie {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];

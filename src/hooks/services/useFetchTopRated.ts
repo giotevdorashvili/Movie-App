@@ -1,17 +1,18 @@
 import {useQuery} from '@tanstack/react-query';
-import axios from 'axios';
 
-import {getOptions} from '../utils';
-import {GenericMoviesList} from '../types';
+import {
+  axiosInstance,
+  queryKeysMap,
+  axiosUrlsMap,
+} from '../../utils/serviceUtils/utils';
+import {GenericMoviesList} from './types';
 
 const useFetchUpcoming = () => {
-  const {data, isLoading, isError} = useQuery({
-    queryKey: ['top_rated'],
+  return useQuery({
+    queryKey: [queryKeysMap.topRated],
     queryFn: async () =>
-      await axios.request<GenericMoviesList>(getOptions('top_rated')),
+      await axiosInstance.get<GenericMoviesList>(axiosUrlsMap.topRated),
   });
-
-  return {data: data?.data, isLoading, isError};
 };
 
 export default useFetchUpcoming;

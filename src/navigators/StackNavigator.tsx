@@ -30,7 +30,11 @@ const StackNavigator = () => {
           backgroundColor: background,
         },
       }}>
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen
+        name="Home"
+        component={Home}
+        options={{headerShown: false}}
+      />
       <Stack.Screen name="MovieDetails" component={MovieDetails} />
       <Stack.Screen name="Search" component={Search} />
     </Stack.Navigator>
