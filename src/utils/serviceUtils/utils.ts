@@ -21,3 +21,7 @@ export const axiosUrlsMap: Record<string, string> = {
   popular: 'movie/popular',
   topRated: 'movie/top_rated',
 };
+
+export const getPosterUrl = (posterPath: string) => {
+  return `https://image.tmdb.org/t/p/original${posterPath}`;
+};

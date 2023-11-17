@@ -4,6 +4,8 @@ import {useNavigation} from '@react-navigation/native';
 import {Card} from 'react-native-paper';
 import {LinearGradient} from 'react-native-linear-gradient';
 
+import {getPosterUrl} from '../utils/serviceUtils/utils';
+
 const PressableCover = ({posterPath}: {posterPath: string}) => {
   const navigation = useNavigation();
 
@@ -17,7 +19,7 @@ const PressableCover = ({posterPath}: {posterPath: string}) => {
         <LinearGradient colors={['grey', 'black']} style={styles.gradient}>
           <Card.Cover
             source={{
-              uri: `https://image.tmdb.org/t/p/original${posterPath}`,
+              uri: getPosterUrl(posterPath),
             }}
           />
         </LinearGradient>
