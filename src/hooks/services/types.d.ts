@@ -28,3 +28,5 @@ export interface UpcomingMoviesList extends GenericMoviesList {
     minimum: string;
   };
 }
+
+export type ListNameLiterals = 'upcoming' | 'popular' | 'topRated';

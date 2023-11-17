@@ -4,8 +4,9 @@ import {Text, Button} from 'react-native-paper';
 
 import useMovieList from '../../hooks/services/useMovieList';
 import PressableCover from '../../components/PressableCover';
+import {ListNameLiterals} from '../../hooks/services/types';
 
-const MoviesList = ({listName}: {listName: string}) => {
+const MoviesList = ({listName}: {listName: ListNameLiterals}) => {
   const {data, isLoading, isError} = useMovieList(listName);
 
   const title = listName[0].toUpperCase() + listName.slice(1);
@@ -36,9 +37,7 @@ const MoviesList = ({listName}: {listName: string}) => {
       <FlatList
         horizontal
         data={data?.data?.results}
-        renderItem={({item}) => (
-          <PressableCover posterPath={item.poster_path} />
-        )}
+        renderItem={({item}) => <PressableCover movie={item} />}
         keyExtractor={item => item.id.toString()}
       />
     </View>
