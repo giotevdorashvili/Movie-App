@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, View, StyleSheet, useWindowDimensions} from 'react-native';
+import {FlatList, View, StyleSheet, Dimensions} from 'react-native';
 import {Text, Button, ActivityIndicator} from 'react-native-paper';
 
 import useMovieList from '../../hooks/services/useMovieList';
@@ -8,10 +8,6 @@ import {MovieLists} from './types';
 
 const MoviesList = ({listName, title}: MovieLists) => {
   const {data, isLoading, isError} = useMovieList(listName);
-
-  const {height} = useWindowDimensions();
-
-  const styles = getStyles(height / 4);
 
   const handleSeeAllPress = () => {};
 
@@ -46,29 +42,27 @@ const MoviesList = ({listName, title}: MovieLists) => {
   );
 };
 
-const getStyles = (height: number) => {
-  return StyleSheet.create({
-    container: {
-      flex: 1,
-      marginBottom: 20,
-    },
-    sectionDescriptionContainer: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: 20,
-    },
-    title: {
-      fontSize: 25,
-      fontWeight: '600',
-    },
-    seeAll: {
-      fontSize: 16,
-    },
-    activityIndicator: {
-      height,
-    },
-  });
-};
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginBottom: 20,
+  },
+  sectionDescriptionContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 25,
+    fontWeight: '600',
+  },
+  seeAll: {
+    fontSize: 16,
+  },
+  activityIndicator: {
+    height: Dimensions.get('window').height / 4,
+  },
+});
 
 export default MoviesList;
