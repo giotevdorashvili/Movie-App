@@ -1,20 +1,22 @@
 import React from 'react';
-import {FlatList, View, StyleSheet} from 'react-native';
-import {Text, Button} from 'react-native-paper';
+import {FlatList, View, StyleSheet, useWindowDimensions} from 'react-native';
+import {Text, Button, ActivityIndicator} from 'react-native-paper';
 
 import useMovieList from '../../hooks/services/useMovieList';
 import PressableCover from '../../components/PressableCover';
 import {ListNameLiterals} from '../../hooks/services/types';
 
 const MoviesList = ({listName}: {listName: ListNameLiterals}) => {
+  const {height} = useWindowDimensions();
   const {data, isLoading, isError} = useMovieList(listName);
 
   const title = listName[0].toUpperCase() + listName.slice(1);
+  const activityIndicatorStyle = {height: height / 4};
 
   const handleSeeAllPress = () => {};
 
   if (isLoading) {
-    return <Text>Loading...</Text>;
+    return <ActivityIndicator style={activityIndicatorStyle} />;
   }
 
   if (isError) {
@@ -22,7 +24,7 @@ const MoviesList = ({listName}: {listName: ListNameLiterals}) => {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.sectionDescriptionContainer}>
         <Text style={styles.title}>{title}</Text>
 
@@ -47,9 +49,7 @@ const MoviesList = ({listName}: {listName: ListNameLiterals}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 30,
-    paddingHorizontal: 25,
-    gap: 10,
+    marginBottom: 20,
   },
   sectionDescriptionContainer: {
     flexDirection: 'row',
