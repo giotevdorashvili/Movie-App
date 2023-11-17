@@ -10,7 +10,12 @@ const MoviesList = ({listName}: {listName: ListNameLiterals}) => {
   const {height} = useWindowDimensions();
   const {data, isLoading, isError} = useMovieList(listName);
 
-  const title = listName[0].toUpperCase() + listName.slice(1);
+  let title = listName[0].toUpperCase() + listName.slice(1);
+
+  if (title === 'TopRated') {
+    title = 'Top Rated';
+  }
+
   const activityIndicatorStyle = {height: height / 4};
 
   const handleSeeAllPress = () => {};
