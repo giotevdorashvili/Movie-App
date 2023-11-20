@@ -11,7 +11,7 @@ const PressableCover = ({movie}: {movie: SingleMovie}) => {
   const navigation = useNavigation();
 
   const handleMoviePress = () => {
-    navigation.navigate('MovieDetails', {});
+    navigation.navigate('MovieDetails', {movie});
   };
 
   return (
