@@ -1,13 +1,22 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {FlatList, View, StyleSheet, Dimensions} from 'react-native';
 import {Text, Button, ActivityIndicator} from 'react-native-paper';
 
 import useMovieList from '../../hooks/services/useMovieList';
 import PressableCover from '../../components/PressableCover';
 import {MovieLists} from './types';
+import {SingleMovie} from '../../hooks/services/types';
 
 const MoviesList = ({listName, title}: MovieLists) => {
   const {data, isLoading, isError} = useMovieList(listName);
+
+  const renderItem = useCallback(({item}: {item: SingleMovie}) => {
+    return <PressableCover movie={item} />;
+  }, []);
+
+  const getKey = useCallback(({id}: {id: number}) => {
+    return id.toString();
+  }, []);
 
   const handleSeeAllPress = () => {};
 
@@ -35,8 +44,8 @@ const MoviesList = ({listName, title}: MovieLists) => {
       <FlatList
         horizontal
         data={data?.data?.results}
-        renderItem={({item}) => <PressableCover movie={item} />}
-        keyExtractor={item => item.id.toString()}
+        renderItem={renderItem}
+        keyExtractor={getKey}
       />
     </View>
   );
