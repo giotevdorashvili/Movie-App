@@ -11,7 +11,7 @@ const useMovieDetails = (id: number) => {
   const moviesListUrl = getAxiosMovieDetailsUrl(id);
 
   return useQuery({
-    queryKey: [key],
+    queryKey: [key, id],
     queryFn: async () => await axiosInstance.get(moviesListUrl),
   });
 };
