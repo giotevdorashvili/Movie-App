@@ -8,14 +8,13 @@ import Home from '../screens/home/Home';
 import MovieDetails from '../screens/movieDetails/MovieDetails';
 import Search from '../screens/Search';
 import {useThemeColors} from '../theme/theme';
-import {SingleMovie} from '../hooks/services/types';
 
 export type ScreenProps<T extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, T>;
 
 export type RootStackParamList = {
   Home: undefined;
-  MovieDetails: {movie: SingleMovie};
+  MovieDetails: {id: number};
   Search: {};
 };
 

@@ -11,7 +11,7 @@ const MoviesList = ({listName, title}: MovieLists) => {
   const {data, isLoading, isError} = useMovieList(listName);
 
   const renderItem = useCallback(({item}: {item: SingleMovie}) => {
-    return <PressableCover movie={item} />;
+    return <PressableCover movieData={item} />;
   }, []);
 
   const getKey = useCallback(({id}: {id: number}) => {

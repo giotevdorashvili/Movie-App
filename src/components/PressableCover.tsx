@@ -7,11 +7,12 @@ import {LinearGradient} from 'react-native-linear-gradient';
 import {getPosterUrl} from '../utils/serviceUtils/utils';
 import {SingleMovie} from '../hooks/services/types';
 
-const PressableCover = ({movie}: {movie: SingleMovie}) => {
+const PressableCover = ({movieData}: {movieData: SingleMovie}) => {
   const navigation = useNavigation();
 
   const handleMoviePress = () => {
-    navigation.navigate('MovieDetails', {movie});
+    const {id} = movieData;
+    navigation.navigate('MovieDetails', {id});
   };
 
   return (
@@ -20,7 +21,7 @@ const PressableCover = ({movie}: {movie: SingleMovie}) => {
         <LinearGradient colors={['grey', 'black']} style={styles.gradient}>
           <Card.Cover
             source={{
-              uri: getPosterUrl(movie?.poster_path),
+              uri: getPosterUrl(movieData?.poster_path),
             }}
           />
         </LinearGradient>
