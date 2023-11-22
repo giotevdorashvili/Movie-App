@@ -14,9 +14,8 @@
 		487FFB75A3BE3F5E9BE423A8 /* libPods-movieApp-movieAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AFCC5E65B559DF2AC3532A00 /* libPods-movieApp-movieAppTests.a */; };
 		7C8160A4F82D84C65F2E9A73 /* libPods-movieApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C6B770CD377714BA9546AAEF /* libPods-movieApp.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		CEA9E88C2B0BAAB000AF6273 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEA9E8892B0BAAB000AF6273 /* MaterialIcons.ttf */; };
-		CEA9E88D2B0BAAB000AF6273 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEA9E88A2B0BAAB000AF6273 /* FontAwesome.ttf */; };
-		CEA9E88E2B0BAAB000AF6273 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEA9E88B2B0BAAB000AF6273 /* MaterialCommunityIcons.ttf */; };
+		CEE9F51B2B0DD281008A9648 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEE9F5192B0DD281008A9648 /* MaterialIcons.ttf */; };
+		CEE9F51C2B0DD281008A9648 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEE9F51A2B0DD281008A9648 /* MaterialCommunityIcons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,9 +45,8 @@
 		AFCC5E65B559DF2AC3532A00 /* libPods-movieApp-movieAppTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-movieApp-movieAppTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6B770CD377714BA9546AAEF /* libPods-movieApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-movieApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE63A207A78DED897DFFD429 /* Pods-movieApp-movieAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-movieApp-movieAppTests.debug.xcconfig"; path = "Target Support Files/Pods-movieApp-movieAppTests/Pods-movieApp-movieAppTests.debug.xcconfig"; sourceTree = "<group>"; };
-		CEA9E8892B0BAAB000AF6273 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		CEA9E88A2B0BAAB000AF6273 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
-		CEA9E88B2B0BAAB000AF6273 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		CEE9F5192B0DD281008A9648 /* MaterialIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		CEE9F51A2B0DD281008A9648 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -92,7 +90,7 @@
 		13B07FAE1A68108700A75B9A /* movieApp */ = {
 			isa = PBXGroup;
 			children = (
-				CEA9E8882B0BA9B000AF6273 /* Fonts */,
+				CEE9F5182B0DD260008A9648 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -155,12 +153,11 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		CEA9E8882B0BA9B000AF6273 /* Fonts */ = {
+		CEE9F5182B0DD260008A9648 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				CEA9E88A2B0BAAB000AF6273 /* FontAwesome.ttf */,
-				CEA9E88B2B0BAAB000AF6273 /* MaterialCommunityIcons.ttf */,
-				CEA9E8892B0BAAB000AF6273 /* MaterialIcons.ttf */,
+				CEE9F51A2B0DD281008A9648 /* MaterialCommunityIcons.ttf */,
+				CEE9F5192B0DD281008A9648 /* MaterialIcons.ttf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -260,10 +257,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
-				CEA9E88E2B0BAAB000AF6273 /* MaterialCommunityIcons.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				CEA9E88C2B0BAAB000AF6273 /* MaterialIcons.ttf in Resources */,
-				CEA9E88D2B0BAAB000AF6273 /* FontAwesome.ttf in Resources */,
+				CEE9F51C2B0DD281008A9648 /* MaterialCommunityIcons.ttf in Resources */,
+				CEE9F51B2B0DD281008A9648 /* MaterialIcons.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,7 +353,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-movieApp/Pods-movieApp-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

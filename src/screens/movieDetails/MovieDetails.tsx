@@ -6,7 +6,7 @@ import {Text} from 'react-native-paper';
 import {MovieDetailTypes} from '../../hooks/services/types';
 import {ScreenProps} from '../../navigators/StackNavigator';
 import useMovieDetails from '../../hooks/services/useMovieDetails';
-import BackgroundImage from './backgroundImage';
+import BackgroundImage from './BackgroundImage';
 import MovieDescription from './MovieDescription';
 
 const MovieDetails: React.FC<ScreenProps<'MovieDetails'>> = ({route}) => {
