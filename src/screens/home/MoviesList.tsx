@@ -52,6 +52,7 @@ const MoviesList = ({listName, title}: MovieLists) => {
         data={data?.data?.results}
         renderItem={renderItem}
         estimatedItemSize={20}
+        keyExtractor={movie => movie.id.toString()}
       />
     </View>
   );

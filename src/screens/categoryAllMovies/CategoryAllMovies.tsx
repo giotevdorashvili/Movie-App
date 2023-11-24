@@ -66,6 +66,7 @@ const CategoryAllMovies: React.FC<ScreenProps<'CategoryAllMovies'>> = ({
         numColumns={3}
         onEndReached={handleIncreasePage}
         onEndReachedThreshold={0.1}
+        keyExtractor={movie => movie.id.toString()}
       />
     </SafeAreaView>
   );
