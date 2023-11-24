@@ -2,20 +2,29 @@ import React, {useCallback} from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native';
 import {Text, Button, ActivityIndicator} from 'react-native-paper';
 import {FlashList} from '@shopify/flash-list';
+import {useNavigation} from '@react-navigation/native';
 
-import useMovieList from '../../hooks/services/useMovieList';
-import PressableCover from '../../components/PressableCover';
 import {MovieLists} from './types';
 import {SingleMovie} from '../../hooks/services/types';
+import useMovieList from '../../hooks/services/useMovieList';
+import PressableCover from '../../components/PressableCover';
+import {queryKeysMap} from '../../utils/serviceUtils/utils';
 
 const MoviesList = ({listName, title}: MovieLists) => {
   const {data, isLoading, isError} = useMovieList(listName);
 
+  const navigation = useNavigation();
+
   const renderItem = useCallback(({item}: {item: SingleMovie}) => {
-    return <PressableCover movieData={item} />;
+    return <PressableCover movieData={item} cardStyle={styles.cardStyle} />;
   }, []);
 
-  const handleSeeAllPress = () => {};
+  const handleSeeAllPress = () => {
+    navigation.navigate('CategoryAllMovies', {
+      keyName: queryKeysMap[listName],
+      title,
+    });
+  };
 
   if (isLoading) {
     return <ActivityIndicator style={styles.activityIndicator} />;
@@ -68,6 +77,11 @@ const styles = StyleSheet.create({
   },
   activityIndicator: {
     height: Dimensions.get('window').height / 4,
+  },
+  cardStyle: {
+    width: 130,
+    height: 200,
+    marginRight: 10,
   },
 });
 

@@ -72,4 +72,4 @@ export interface MovieDetailTypes {
   vote_count: number;
 }
 
-export type ListNameLiterals = 'upcoming' | 'popular' | 'topRated';
+export type ListNameLiterals = 'upcoming' | 'popular' | 'top_rated';
