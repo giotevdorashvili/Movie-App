@@ -8,21 +8,16 @@ export const axiosInstance = axios.create({
   },
   params: {
     api_key: '667038ddd2f7ddacc73fd59a56c8c22d',
+    language: 'en-US',
   },
 });
 
-export const getAxiosInstance = (pageParam: number) => {
-  return axios.create({
-    baseURL: 'https://api.themoviedb.org/3/',
-    headers: {
-      accept: 'application/json',
-    },
+export const getOptionParams = (pageParam: number) => {
+  return {
     params: {
-      api_key: '667038ddd2f7ddacc73fd59a56c8c22d',
-      language: 'en-US',
       page: String(pageParam),
     },
-  });
+  };
 };
 
 export const queryKeysMap: Record<string, ListNameLiterals> = {

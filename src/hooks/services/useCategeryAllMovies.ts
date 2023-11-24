@@ -1,6 +1,10 @@
 import {useInfiniteQuery} from '@tanstack/react-query';
 
-import {axiosUrlsMap, getAxiosInstance} from '../../utils/serviceUtils/utils';
+import {
+  axiosUrlsMap,
+  getOptionParams,
+  axiosInstance,
+} from '../../utils/serviceUtils/utils';
 import {
   GenericMoviesList,
   UpcomingMoviesList,
@@ -10,12 +14,14 @@ import {
 const useCategeryAllMovies = (listType: ListNameLiterals) => {
   const key = listType;
   const moviesListUrl = axiosUrlsMap[listType];
+
   return useInfiniteQuery({
     queryKey: ['all', key],
     queryFn: async ({pageParam}: {pageParam: number}) => {
-      return await getAxiosInstance(pageParam).get<
-        GenericMoviesList | UpcomingMoviesList
-      >(moviesListUrl);
+      return await axiosInstance.get<GenericMoviesList | UpcomingMoviesList>(
+        moviesListUrl,
+        getOptionParams(pageParam),
+      );
     },
     getNextPageParam: lastPage => {
       return lastPage?.data.page < lastPage?.data.total_pages
