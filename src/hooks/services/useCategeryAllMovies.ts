@@ -18,7 +18,7 @@ const useCategeryAllMovies = (listType: ListNameLiterals) => {
       >(moviesListUrl);
     },
     getNextPageParam: lastPage => {
-      return lastPage?.data.page < lastPage?.data.total_results
+      return lastPage?.data.page < lastPage?.data.total_pages
         ? lastPage.data.page + 1
         : null;
     },
