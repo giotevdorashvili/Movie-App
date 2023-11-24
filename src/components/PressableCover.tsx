@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Pressable, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {Card} from 'react-native-paper';
@@ -7,11 +7,12 @@ import {LinearGradient} from 'react-native-linear-gradient';
 import {getPosterUrl} from '../utils/serviceUtils/utils';
 import {SingleMovie} from '../hooks/services/types';
 
-const PressableCover = ({movie}: {movie: SingleMovie}) => {
+const PressableCover = memo(({movieData}: {movieData: SingleMovie}) => {
   const navigation = useNavigation();
 
   const handleMoviePress = () => {
-    navigation.navigate('MovieDetails', {});
+    const {id} = movieData;
+    navigation.navigate('MovieDetails', {id});
   };
 
   return (
@@ -20,14 +21,14 @@ const PressableCover = ({movie}: {movie: SingleMovie}) => {
         <LinearGradient colors={['grey', 'black']} style={styles.gradient}>
           <Card.Cover
             source={{
-              uri: getPosterUrl(movie?.poster_path),
+              uri: getPosterUrl(movieData?.poster_path),
             }}
           />
         </LinearGradient>
       </Card>
     </Pressable>
   );
-};
+});
 
 const styles = StyleSheet.create({
   container: {
