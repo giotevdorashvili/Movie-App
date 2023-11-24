@@ -11,7 +11,7 @@ const Home: React.FC<ScreenProps<'Home'>> = () => {
       <ScrollView>
         <MoviesList listName="upcoming" title="Upcoming" />
         <MoviesList listName="popular" title="Popular" />
-        <MoviesList listName="topRated" title="Top Rated" />
+        <MoviesList listName="top_rated" title="Top Rated" />
       </ScrollView>
     </SafeAreaView>
   );
