@@ -28,16 +28,6 @@ const CategoryAllMovies: React.FC<ScreenProps<'CategoryAllMovies'>> = ({
 
   const dataResults = data?.pages.flatMap(page => page.data.results);
 
-  const ids = dataResults?.map(movie => movie.id);
-
-  ids?.forEach((id, i) => {
-    ids?.forEach((id2, j) => {
-      if (id === id2 && i !== j) {
-        console.log(id, i, j, '................................');
-      }
-    });
-  });
-
   const handleIncreasePage = () => {
     if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();

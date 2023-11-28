@@ -1,33 +1,29 @@
 import {useEffect, useState, useCallback} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import {MovieDetailTypes, SingleMovie} from '../services/types';
+type MovieIds = number[];
 
 export const useAsyncStorage = (
   key: string,
-): [
-  (MovieDetailTypes | SingleMovie)[],
-  (value: MovieDetailTypes[]) => void,
-] => {
-  const [storedValue, setStoredValue] = useState<
-    (MovieDetailTypes | SingleMovie)[]
-  >([]);
+): [MovieIds, (value: MovieIds) => void] => {
+  const [storedValue, setStoredValue] = useState<MovieIds>([]);
 
   useEffect(() => {
     (async () => {
       try {
         const item = await AsyncStorage.getItem(key);
-        const value = item ? JSON.parse(item) : [];
 
-        setStoredValue(value);
+        if (item) {
+          setStoredValue(JSON.parse(item));
+        }
       } catch (error) {
-        console.log(error);
+        console.log(error, '-------error in useAsyncStorage');
       }
     })();
   }, [key]);
 
   const setValue = useCallback(
-    async (value: (MovieDetailTypes | SingleMovie)[]) => {
+    async (value: MovieIds) => {
       try {
         setStoredValue(value);
         await AsyncStorage.setItem(key, JSON.stringify(value));

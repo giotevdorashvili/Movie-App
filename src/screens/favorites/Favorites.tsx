@@ -1,32 +1,42 @@
 import React, {useCallback} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Text} from 'react-native-paper';
+import {Dimensions, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, Text} from 'react-native-paper';
 import {useFocusEffect} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {FlashList} from '@shopify/flash-list';
 
 import {ScreenProps} from '../../navigators/StackNavigator';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import useAsyncStorage from '../../hooks/syncStorage/useAsyncStorage';
+import useAsyncStorage from '../../hooks/asyncStorage/useAsyncStorage';
 import GoBackButton from '../../components/GoBackButton';
 import useRenderItem from '../../hooks/flatLIst/useRenderItem';
+import useFavoriteMovies from '../../hooks/services/useFavoriteMovies';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Favorites: React.FC<ScreenProps<'Favorites'>> = () => {
-  const [favorites, setFavorites] = useAsyncStorage('favorites');
+  const [ids, setIds] = useAsyncStorage('favorites');
+  const {data, isLoading, isError, error} = useFavoriteMovies(ids);
 
   const renderItem = useRenderItem(styles.cardStyle);
 
   useFocusEffect(
     useCallback(() => {
       (async () => {
-        const latestFavorites = await AsyncStorage.getItem('favorites');
+        const latestIds = await AsyncStorage.getItem('favorites');
 
-        setFavorites(latestFavorites ? JSON.parse(latestFavorites) : []);
+        setIds(latestIds ? JSON.parse(latestIds) : []);
       })();
-    }, [setFavorites]),
+    }, [setIds]),
   );
 
-  if (!favorites.length) {
+  if (isLoading) {
+    return <ActivityIndicator style={styles.activityIndicator} />;
+  }
+
+  if (isError) {
+    return <Text>{error.message}</Text>;
+  }
+
+  if (!data?.length) {
     return (
       <SafeAreaView style={styles.container}>
         <GoBackButton />
@@ -44,9 +54,9 @@ const Favorites: React.FC<ScreenProps<'Favorites'>> = () => {
       </View>
 
       <FlashList
-        data={favorites}
+        data={data}
         renderItem={renderItem}
-        estimatedItemSize={favorites.length}
+        estimatedItemSize={data?.length}
         numColumns={3}
         keyExtractor={(movie, index) => `${movie.id.toString()}-${index}`}
       />
@@ -84,6 +94,9 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     alignSelf: 'center',
     top: '30%',
+  },
+  activityIndicator: {
+    height: Dimensions.get('window').height / 4,
   },
 });
 
