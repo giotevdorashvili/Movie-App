@@ -7,17 +7,14 @@ import {FlashList} from '@shopify/flash-list';
 
 import {ScreenProps} from '../../navigators/StackNavigator';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {MovieDetailTypes} from '../../hooks/services/types';
-import PressableCover from '../../components/PressableCover';
 import useAsyncStorage from '../../hooks/syncStorage/useAsyncStorage';
 import GoBackButton from '../../components/GoBackButton';
+import useRenderItem from '../../hooks/flatLIst/useRenderItem';
 
 const Favorites: React.FC<ScreenProps<'Favorites'>> = () => {
   const [favorites, setFavorites] = useAsyncStorage('favorites');
 
-  const renderItem = ({item}: {item: MovieDetailTypes}) => {
-    return <PressableCover movieData={item} cardStyle={styles.cardStyle} />;
-  };
+  const renderItem = useRenderItem(styles.cardStyle);
 
   useFocusEffect(
     useCallback(() => {
