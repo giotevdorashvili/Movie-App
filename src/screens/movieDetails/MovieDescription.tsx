@@ -10,7 +10,7 @@ import useAsyncStorage from '../../hooks/asyncStorage/useAsyncStorage';
 const MovieDescription = ({movieData}: {movieData: MovieDetailTypes}) => {
   const [ids, setIds] = useAsyncStorage('favorites');
 
-  const [iconColor, setIconColor] = useState<string>();
+  const [movieFavorited, setMovieFavorited] = useState<boolean>();
 
   const hours = Math.floor(movieData?.runtime / 60);
   const mins = movieData?.runtime % 60;
@@ -19,9 +19,9 @@ const MovieDescription = ({movieData}: {movieData: MovieDetailTypes}) => {
 
   useEffect(() => {
     if (isMovieFavoreted) {
-      setIconColor(PaperTheme.colors.orange);
+      setMovieFavorited(true);
     } else {
-      setIconColor(PaperTheme.colors.outline);
+      setMovieFavorited(false);
     }
   }, [ids, movieData.id, isMovieFavoreted]);
 
@@ -46,7 +46,7 @@ const MovieDescription = ({movieData}: {movieData: MovieDetailTypes}) => {
         <View style={styles.titleIconContainer}>
           <Text style={styles.title}>{movieData.title}</Text>
 
-          <FavoritesButton onPress={onPress} iconColor={iconColor} />
+          <FavoritesButton onPress={onPress} movieFavorited={movieFavorited} />
         </View>
         <View style={styles.movieDescrcriptionDetails}>
           <View style={styles.ratingContainer}>

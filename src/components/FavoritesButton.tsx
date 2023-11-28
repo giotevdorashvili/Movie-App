@@ -5,15 +5,17 @@ import {PaperTheme} from '../theme/theme';
 
 const FavoritesButton = ({
   onPress,
-  iconColor = PaperTheme.colors.orange,
+  movieFavorited = true,
 }: {
   onPress: () => void;
-  iconColor?: string;
+  movieFavorited?: boolean;
 }) => {
   return (
     <IconButton
       icon="heart"
-      iconColor={iconColor}
+      iconColor={
+        movieFavorited ? PaperTheme.colors.tomato : PaperTheme.colors.outline
+      }
       size={25}
       onPress={onPress}
       style={styles.iconButton}
