@@ -1,18 +1,16 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {ActivityIndicator, IconButton, Text} from 'react-native-paper';
+import {ActivityIndicator, Text} from 'react-native-paper';
 import {FlashList} from '@shopify/flash-list';
 
-import PressableCover from '../../components/PressableCover';
-import {SingleMovie} from '../../hooks/services/types';
 import useCategeryAllMovies from '../../hooks/services/useCategeryAllMovies';
 import {ScreenProps} from '../../navigators/StackNavigator';
-import {PaperTheme} from '../../theme/theme';
+import GoBackButton from '../../components/GoBackButton';
+import useRenderItem from '../../hooks/flatLIst/useRenderItem';
 
 const CategoryAllMovies: React.FC<ScreenProps<'CategoryAllMovies'>> = ({
   route,
-  navigation,
 }) => {
   const {keyName, title} = route.params;
 
@@ -21,22 +19,30 @@ const CategoryAllMovies: React.FC<ScreenProps<'CategoryAllMovies'>> = ({
     error,
     isError,
     isLoading,
-    isFetching,
     hasNextPage,
     fetchNextPage,
+    isFetchingNextPage,
   } = useCategeryAllMovies(keyName);
 
-  const renderItem = useCallback(({item}: {item: SingleMovie}) => {
-    return <PressableCover movieData={item} cardStyle={styles.cardStyle} />;
-  }, []);
+  const renderItem = useRenderItem(styles.cardStyle);
+
+  const dataResults = data?.pages.flatMap(page => page.data.results);
+
+  const ids = dataResults?.map(movie => movie.id);
+
+  ids?.forEach((id, i) => {
+    ids?.forEach((id2, j) => {
+      if (id === id2 && i !== j) {
+        console.log(id, i, j, '................................');
+      }
+    });
+  });
 
   const handleIncreasePage = () => {
-    if (hasNextPage && !isFetching) {
+    if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
     }
   };
-
-  const dataResults = data?.pages.map(page => page.data.results).flat();
 
   if (isLoading) {
     return <ActivityIndicator style={styles.container} />;
@@ -49,13 +55,7 @@ const CategoryAllMovies: React.FC<ScreenProps<'CategoryAllMovies'>> = ({
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.titleButtonContainer}>
-        <IconButton
-          icon="chevron-left"
-          iconColor={PaperTheme.colors.onBackground}
-          containerColor={PaperTheme.colors.greyOpacity}
-          size={24}
-          onPress={navigation.goBack}
-        />
+        <GoBackButton />
         <Text style={styles.title}>All {title} Movies</Text>
       </View>
 
@@ -66,7 +66,7 @@ const CategoryAllMovies: React.FC<ScreenProps<'CategoryAllMovies'>> = ({
         numColumns={3}
         onEndReached={handleIncreasePage}
         onEndReachedThreshold={0.1}
-        keyExtractor={movie => movie.id.toString()}
+        keyExtractor={(movie, index) => `${movie.id.toString()}-${index}`}
       />
     </SafeAreaView>
   );

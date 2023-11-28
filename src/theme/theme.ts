@@ -11,6 +11,7 @@ export const PaperTheme = {
     orange: '#F23801',
     grey: 'grey',
     greyOpacity: 'rgba(173, 166, 141, 0.4)',
+    tomato: 'tomato',
   },
 };
 

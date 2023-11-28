@@ -1,23 +1,14 @@
 import React from 'react';
 import {ImageBackground, StyleSheet, Dimensions} from 'react-native';
+import {Text} from 'react-native-paper';
 
-import {IconButton, Text} from 'react-native-paper';
-import {useNavigation} from '@react-navigation/native';
 import {getPosterUrl} from '../../utils/serviceUtils/utils';
-import {PaperTheme} from '../../theme/theme';
+import GoBackButton from '../../components/GoBackButton';
 
 const BackgroundImage = ({path}: {path: string}) => {
-  const navigation = useNavigation();
-
   return (
     <ImageBackground source={{uri: getPosterUrl(path)}} style={styles.image}>
-      <IconButton
-        icon="chevron-left"
-        iconColor={PaperTheme.colors.onBackground}
-        containerColor={PaperTheme.colors.greyOpacity}
-        size={27}
-        onPress={navigation.goBack}
-      />
+      <GoBackButton />
 
       <Text style={styles.preview}>Preview</Text>
     </ImageBackground>

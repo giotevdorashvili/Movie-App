@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
-import {ScreenProps} from '../navigators/StackNavigator';
+import {ScreenProps} from '../../navigators/StackNavigator';
 
 const Search: React.FC<ScreenProps<'Search'>> = () => {
   return (

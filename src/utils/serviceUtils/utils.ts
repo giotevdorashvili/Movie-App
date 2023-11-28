@@ -1,5 +1,4 @@
 import axios from 'axios';
-import {ListNameLiterals} from '../../hooks/services/types';
 
 export const axiosInstance = axios.create({
   baseURL: 'https://api.themoviedb.org/3/',
@@ -11,30 +10,6 @@ export const axiosInstance = axios.create({
     language: 'en-US',
   },
 });
-
-export const getOptionParams = (pageParam: number) => {
-  return {
-    params: {
-      page: String(pageParam),
-    },
-  };
-};
-
-export const queryKeysMap: Record<string, ListNameLiterals> = {
-  upcoming: 'upcoming',
-  popular: 'popular',
-  top_rated: 'top_rated',
-};
-
-export const axiosUrlsMap: Record<string, string> = {
-  upcoming: 'movie/upcoming',
-  popular: 'movie/popular',
-  top_rated: 'movie/top_rated',
-};
-
-export const getAxiosMovieDetailsUrl = (id: number) => {
-  return `movie/${id}`;
-};
 
 export const getPosterUrl = (posterPath: string) => {
   return `https://image.tmdb.org/t/p/original${posterPath}`;
