@@ -6,9 +6,15 @@ const useFavoriteMovies = (ids: number[]) => {
     queryKey: ['movies', ids],
     queryFn: async () => {
       const requests = ids.map(id => axiosInstance.get(`movie/${id}`));
-      const responses = await Promise.all(requests);
+      const responses = await Promise.allSettled(requests);
 
-      return responses.map(response => response.data);
+      return responses
+        .filter(result => result.status === 'fulfilled')
+        .map(result => {
+          if (result.status === 'fulfilled') {
+            return result.value.data;
+          }
+        });
     },
   });
 };
