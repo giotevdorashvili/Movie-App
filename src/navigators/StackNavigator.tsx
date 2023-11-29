@@ -28,13 +28,17 @@ export type RootStackParamList = {
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const StackNavigator = () => {
-  const renderFavoritesButton = (navigation: NavigationProp<any>) => (
+const renderFavoritesButton = (navigation: NavigationProp<any>) => {
+  return (
     <FavoritesButton onPress={() => navigation.navigate('Favorites', {})} />
   );
+};
 
-  const renderGoBackButton = () => <GoBackButton />;
+const renderGoBackButton = () => {
+  return <GoBackButton />;
+};
 
+const StackNavigator = () => {
   return (
     <Stack.Navigator
       screenOptions={{
@@ -71,9 +75,9 @@ const StackNavigator = () => {
       <Stack.Screen
         name="Favorites"
         component={Favorites}
-        // options={{
-        //   headerLeft: renderGoBackButton,
-        // }}
+        options={{
+          headerLeft: renderGoBackButton,
+        }}
       />
       <Stack.Screen name="Search" component={Search} />
     </Stack.Navigator>
