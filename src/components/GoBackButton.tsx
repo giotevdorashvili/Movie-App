@@ -11,7 +11,7 @@ const GoBackButton = () => {
       icon="chevron-left"
       iconColor={PaperTheme.colors.onBackground}
       containerColor={PaperTheme.colors.greyOpacity}
-      size={24}
+      size={18}
       onPress={navigation.goBack}
     />
   );

@@ -1,16 +1,16 @@
 import React, {useCallback} from 'react';
-import {Dimensions, StyleSheet, View} from 'react-native';
+import {Dimensions, StyleSheet} from 'react-native';
 import {ActivityIndicator, Text} from 'react-native-paper';
 import {useFocusEffect} from '@react-navigation/native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {FlashList} from '@shopify/flash-list';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {ScreenProps} from '../../navigators/StackNavigator';
 import useAsyncStorage from '../../hooks/asyncStorage/useAsyncStorage';
 import GoBackButton from '../../components/GoBackButton';
 import useRenderItem from '../../hooks/flatLIst/useRenderItem';
 import useFavoriteMovies from '../../hooks/services/useFavoriteMovies';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Favorites: React.FC<ScreenProps<'Favorites'>> = () => {
   const [ids, setIds] = useAsyncStorage('favorites');
@@ -48,11 +48,6 @@ const Favorites: React.FC<ScreenProps<'Favorites'>> = () => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.titleButtonContainer}>
-        <GoBackButton />
-        <Text style={styles.title}>Favorites</Text>
-      </View>
-
       <FlashList
         data={data}
         renderItem={renderItem}
@@ -69,12 +64,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 10,
-  },
-  titleButtonContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 25,
-    marginLeft: 15,
+    paddingTop: -20,
   },
   title: {
     fontSize: 20,

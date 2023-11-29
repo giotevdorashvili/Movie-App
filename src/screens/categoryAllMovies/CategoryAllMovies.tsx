@@ -1,16 +1,16 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useEffect} from 'react';
+import {StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ActivityIndicator, Text} from 'react-native-paper';
 import {FlashList} from '@shopify/flash-list';
 
 import useCategeryAllMovies from '../../hooks/services/useCategeryAllMovies';
 import {ScreenProps} from '../../navigators/StackNavigator';
-import GoBackButton from '../../components/GoBackButton';
 import useRenderItem from '../../hooks/flatLIst/useRenderItem';
 
 const CategoryAllMovies: React.FC<ScreenProps<'CategoryAllMovies'>> = ({
   route,
+  navigation,
 }) => {
   const {keyName, title} = route.params;
 
@@ -28,6 +28,10 @@ const CategoryAllMovies: React.FC<ScreenProps<'CategoryAllMovies'>> = ({
 
   const dataResults = data?.pages.flatMap(page => page.data.results);
 
+  useEffect(() => {
+    navigation.setParams({title});
+  }, [navigation, title]);
+
   const handleIncreasePage = () => {
     if (hasNextPage && !isFetchingNextPage) {
       fetchNextPage();
@@ -44,11 +48,6 @@ const CategoryAllMovies: React.FC<ScreenProps<'CategoryAllMovies'>> = ({
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.titleButtonContainer}>
-        <GoBackButton />
-        <Text style={styles.title}>All {title} Movies</Text>
-      </View>
-
       <FlashList
         data={dataResults}
         renderItem={renderItem}
@@ -65,14 +64,8 @@ const CategoryAllMovies: React.FC<ScreenProps<'CategoryAllMovies'>> = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
     paddingHorizontal: 10,
-  },
-  titleButtonContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 25,
-    marginLeft: 15,
+    paddingTop: -20,
   },
   title: {
     fontSize: 20,
