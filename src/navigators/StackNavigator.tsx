@@ -71,9 +71,9 @@ const StackNavigator = () => {
       <Stack.Screen
         name="Favorites"
         component={Favorites}
-        options={{
-          headerLeft: renderGoBackButton,
-        }}
+        // options={{
+        //   headerLeft: renderGoBackButton,
+        // }}
       />
       <Stack.Screen name="Search" component={Search} />
     </Stack.Navigator>

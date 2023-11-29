@@ -8,7 +8,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import {ScreenProps} from '../../navigators/StackNavigator';
 import useAsyncStorage from '../../hooks/asyncStorage/useAsyncStorage';
-import GoBackButton from '../../components/GoBackButton';
 import useRenderItem from '../../hooks/flatLIst/useRenderItem';
 import useFavoriteMovies from '../../hooks/services/useFavoriteMovies';
 
@@ -39,8 +38,6 @@ const Favorites: React.FC<ScreenProps<'Favorites'>> = () => {
   if (!data?.length) {
     return (
       <SafeAreaView style={styles.container}>
-        <GoBackButton />
-
         <Text style={styles.favorite}>No Favorites found</Text>
       </SafeAreaView>
     );
