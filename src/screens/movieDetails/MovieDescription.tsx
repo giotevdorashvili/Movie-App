@@ -1,44 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {IconButton, Text} from 'react-native-paper';
 
 import {MovieDetailTypes} from '../../hooks/services/types';
 import {PaperTheme} from '../../theme/theme';
 import FavoritesButton from '../../components/FavoritesButton';
-import useAsyncStorage from '../../hooks/asyncStorage/useAsyncStorage';
+import useUpdateFavorites from '../../hooks/asyncStorage/useUpdateFavorites';
 
 const MovieDescription = ({movieData}: {movieData: MovieDetailTypes}) => {
-  const [ids, setIds] = useAsyncStorage('favorites');
-
-  const [movieFavorited, setMovieFavorited] = useState<boolean>();
+  const {isMovieFavoreted, onPress} = useUpdateFavorites(movieData.id);
 
   const hours = Math.floor(movieData?.runtime / 60);
   const mins = movieData?.runtime % 60;
-
-  const isMovieFavoreted = ids.some((id: number) => id === movieData.id);
-
-  useEffect(() => {
-    if (isMovieFavoreted) {
-      setMovieFavorited(true);
-    } else {
-      setMovieFavorited(false);
-    }
-  }, [ids, movieData.id, isMovieFavoreted]);
-
-  const onPress = async () => {
-    try {
-      let updatedIds;
-
-      if (isMovieFavoreted) {
-        updatedIds = ids.filter((id: number) => id !== movieData.id);
-      } else {
-        updatedIds = [...ids, movieData.id];
-      }
-      setIds(updatedIds);
-    } catch (e) {
-      console.log(e, '..............//////////');
-    }
-  };
 
   return (
     <>
@@ -46,7 +19,10 @@ const MovieDescription = ({movieData}: {movieData: MovieDetailTypes}) => {
         <View style={styles.titleIconContainer}>
           <Text style={styles.title}>{movieData.title}</Text>
 
-          <FavoritesButton onPress={onPress} movieFavorited={movieFavorited} />
+          <FavoritesButton
+            onPress={onPress}
+            movieFavorited={isMovieFavoreted}
+          />
         </View>
         <View style={styles.movieDescrcriptionDetails}>
           <View style={styles.ratingContainer}>
