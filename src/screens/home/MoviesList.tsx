@@ -1,27 +1,23 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {View, StyleSheet, Dimensions} from 'react-native';
 import {Text, Button, ActivityIndicator} from 'react-native-paper';
 import {FlashList} from '@shopify/flash-list';
 import {useNavigation} from '@react-navigation/native';
 
 import {MovieLists} from './types';
-import {SingleMovie} from '../../hooks/services/types';
 import useMovieList from '../../hooks/services/useMovieList';
-import PressableCover from '../../components/PressableCover';
-import {queryKeysMap} from '../../utils/serviceUtils/utils';
+import useRenderItem from '../../hooks/flatLIst/useRenderItem';
 
 const MoviesList = ({listName, title}: MovieLists) => {
   const {data, isLoading, isError} = useMovieList(listName);
 
   const navigation = useNavigation();
 
-  const renderItem = useCallback(({item}: {item: SingleMovie}) => {
-    return <PressableCover movieData={item} cardStyle={styles.cardStyle} />;
-  }, []);
+  const renderItem = useRenderItem(styles.cardStyle);
 
   const handleSeeAllPress = () => {
     navigation.navigate('CategoryAllMovies', {
-      keyName: queryKeysMap[listName],
+      keyName: listName,
       title,
     });
   };

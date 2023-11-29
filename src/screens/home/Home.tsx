@@ -20,8 +20,8 @@ const Home: React.FC<ScreenProps<'Home'>> = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 30,
     marginHorizontal: 25,
+    paddingTop: -40,
   },
 });
 

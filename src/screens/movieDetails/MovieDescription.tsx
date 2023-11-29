@@ -4,15 +4,26 @@ import {IconButton, Text} from 'react-native-paper';
 
 import {MovieDetailTypes} from '../../hooks/services/types';
 import {PaperTheme} from '../../theme/theme';
+import FavoritesButton from '../../components/FavoritesButton';
+import useUpdateFavorites from '../../hooks/asyncStorage/useUpdateFavorites';
 
 const MovieDescription = ({movieData}: {movieData: MovieDetailTypes}) => {
+  const {isMovieFavoreted, onPress} = useUpdateFavorites(movieData.id);
+
   const hours = Math.floor(movieData?.runtime / 60);
   const mins = movieData?.runtime % 60;
 
   return (
     <>
       <View style={styles.movieDescrcriptionContainer}>
-        <Text style={styles.title}>{movieData.title}</Text>
+        <View style={styles.titleIconContainer}>
+          <Text style={styles.title}>{movieData.title}</Text>
+
+          <FavoritesButton
+            onPress={onPress}
+            movieFavorited={isMovieFavoreted}
+          />
+        </View>
         <View style={styles.movieDescrcriptionDetails}>
           <View style={styles.ratingContainer}>
             <IconButton
@@ -48,14 +59,21 @@ const styles = StyleSheet.create({
     paddingTop: 30,
     gap: 10,
   },
+  titleIconContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    minWidth: '90%',
+  },
+  title: {
+    fontSize: 25,
+    maxWidth: '80%',
+  },
   movieDescrcriptionDetails: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
     gap: 10,
-  },
-  title: {
-    fontSize: 25,
   },
   ratingContainer: {
     flexDirection: 'row',
