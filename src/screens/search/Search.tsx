@@ -14,7 +14,7 @@ import useDebounce from '../../hooks/search/useDebounce';
 const Search: React.FC<ScreenProps<'Search'>> = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
 
-  const [query] = useDebounce(searchQuery, 1000);
+  const query = useDebounce(searchQuery, 1000);
 
   const renderItem = useSearchRenderItem();
 
