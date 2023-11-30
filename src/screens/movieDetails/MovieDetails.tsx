@@ -5,7 +5,7 @@ import {Text} from 'react-native-paper';
 
 import {MovieDetailTypes} from '../../hooks/services/types';
 import {ScreenProps} from '../../navigators/StackNavigator';
-import BackgroundImage from './BackgroundImage';
+import BackgroundImage from './backgroundImage';
 import MovieDescription from './MovieDescription';
 import useMovieDetails from '../../hooks/services/useMovieDetails';
 
