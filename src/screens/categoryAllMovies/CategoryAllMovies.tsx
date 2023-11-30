@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useMemo} from 'react';
 import {StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ActivityIndicator, Text} from 'react-native-paper';
@@ -26,7 +26,10 @@ const CategoryAllMovies: React.FC<ScreenProps<'CategoryAllMovies'>> = ({
 
   const renderItem = useRenderItem(styles.cardStyle);
 
-  const dataResults = data?.pages.flatMap(page => page.data.results);
+  const dataResults = useMemo(
+    () => data?.pages.flatMap(page => page.data.results),
+    [data?.pages],
+  );
 
   useEffect(() => {
     navigation.setParams({title});

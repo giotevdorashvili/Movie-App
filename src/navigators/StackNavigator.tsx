@@ -3,7 +3,6 @@ import {
   NativeStackScreenProps,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import {NavigationProp} from '@react-navigation/native';
 
 import {ListNameLiterals} from '../hooks/services/types';
 import Home from '../screens/home/Home';
@@ -11,9 +10,8 @@ import MovieDetails from '../screens/movieDetails/MovieDetails';
 import CategoryAllMovies from '../screens/categoryAllMovies/CategoryAllMovies';
 import Favorites from '../screens/favorites/Favorites';
 import Search from '../screens/search/Search';
-import FavoritesButton from '../components/FavoritesButton';
 import {PaperTheme} from '../theme/theme';
-import GoBackButton from '../components/GoBackButton';
+import {renderFavoritesButton, renderGoBackButton} from '../utils/helpers';
 
 export type ScreenProps<T extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, T>;
@@ -27,16 +25,6 @@ export type RootStackParamList = {
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-
-const renderFavoritesButton = (navigation: NavigationProp<any>) => {
-  return (
-    <FavoritesButton onPress={() => navigation.navigate('Favorites', {})} />
-  );
-};
-
-const renderGoBackButton = () => {
-  return <GoBackButton />;
-};
 
 const StackNavigator = () => {
   return (
@@ -79,7 +67,14 @@ const StackNavigator = () => {
           headerLeft: renderGoBackButton,
         }}
       />
-      <Stack.Screen name="Search" component={Search} />
+      <Stack.Screen
+        name="Search"
+        component={Search}
+        options={{
+          title: '',
+          headerLeft: renderGoBackButton,
+        }}
+      />
     </Stack.Navigator>
   );
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import {IconButton} from 'react-native-paper';
-import {PaperTheme} from '../theme/theme';
 import {useNavigation} from '@react-navigation/native';
+import {PaperTheme} from '../theme/theme';
 
 const GoBackButton = () => {
   const navigation = useNavigation();
