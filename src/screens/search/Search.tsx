@@ -2,7 +2,6 @@ import React, {useMemo, useState} from 'react';
 import {Dimensions, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Text, ActivityIndicator} from 'react-native-paper';
-import {useDebounce} from 'use-debounce';
 import {FlashList} from '@shopify/flash-list';
 
 import {ScreenProps} from '../../navigators/StackNavigator';
@@ -10,6 +9,7 @@ import useSearchMovies from '../../hooks/services/useSearchMovies';
 import SearchInput from './SearchInput';
 import useSearchRenderItem from '../../hooks/flatLIst/useSearchRenderItem';
 import {renderDivider} from '../../utils/helpers';
+import useDebounce from '../../hooks/search/useDebounce';
 
 const Search: React.FC<ScreenProps<'Search'>> = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
