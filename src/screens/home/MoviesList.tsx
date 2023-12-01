@@ -3,10 +3,12 @@ import {View, StyleSheet, Dimensions} from 'react-native';
 import {Text, Button, ActivityIndicator} from 'react-native-paper';
 import {FlashList} from '@shopify/flash-list';
 import {useNavigation} from '@react-navigation/native';
+import Animated, {FadeInLeft} from 'react-native-reanimated';
 
 import {MovieLists} from './types';
 import useMovieList from '../../hooks/services/useMovieList';
 import useRenderItem from '../../hooks/flatLIst/useRenderItem';
+import {PaperTheme} from '../../theme/theme';
 
 const MoviesList = ({listName, title}: MovieLists) => {
   const {data, isLoading, isError} = useMovieList(listName);
@@ -33,7 +35,11 @@ const MoviesList = ({listName, title}: MovieLists) => {
   return (
     <View style={styles.container}>
       <View style={styles.sectionDescriptionContainer}>
-        <Text style={styles.title}>{title}</Text>
+        <Animated.Text
+          style={styles.title}
+          entering={FadeInLeft.duration(1000).delay(500)}>
+          {title}
+        </Animated.Text>
 
         <Button
           onPress={handleSeeAllPress}
@@ -68,6 +74,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 25,
     fontWeight: '600',
+    color: PaperTheme.colors.onSurface,
   },
   seeAll: {
     fontSize: 16,

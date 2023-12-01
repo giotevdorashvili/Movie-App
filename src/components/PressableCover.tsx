@@ -4,8 +4,17 @@ import {useNavigation} from '@react-navigation/native';
 import {Card} from 'react-native-paper';
 import {LinearGradient} from 'react-native-linear-gradient';
 
+import Animated, {
+  useSharedValue,
+  withSpring,
+  useAnimatedStyle,
+  FadeInRight,
+} from 'react-native-reanimated';
+
 import {getPosterUrl} from '../utils/serviceUtils/utils';
 import {SingleMovie, MovieDetailTypes} from '../hooks/services/types';
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
 
 const PressableCover = ({
   movieData,
@@ -16,13 +25,33 @@ const PressableCover = ({
 }) => {
   const navigation = useNavigation();
 
-  const handleMoviePress = () => {
-    const {id} = movieData;
-    navigation.navigate('MovieDetails', {id});
+  const scale = useSharedValue(1);
+
+  const handlePressIn = () => {
+    scale.value = withSpring(0.9);
   };
 
+  const handlePressOut = () => {
+    scale.value = withSpring(1);
+  };
+
+  const handleMoviePress = () => {
+    navigation.navigate('MovieDetails', {id: movieData.id});
+  };
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{scale: scale.value}],
+    };
+  });
+
   return (
-    <Pressable onPress={handleMoviePress}>
+    <AnimatedPressable
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+      onPress={handleMoviePress}
+      entering={FadeInRight.duration(1000).delay(500)}
+      style={animatedStyle}>
       <LinearGradient
         colors={['grey', 'black']}
         style={[styles.gradient, cardStyle]}>
@@ -33,7 +62,7 @@ const PressableCover = ({
           }}
         />
       </LinearGradient>
-    </Pressable>
+    </AnimatedPressable>
   );
 };
 
