@@ -1,12 +1,7 @@
-import React, {useEffect, useMemo, useState, useRef} from 'react';
-import {
-  StyleSheet,
-  useWindowDimensions,
-  NativeSyntheticEvent,
-  NativeScrollEvent,
-} from 'react-native';
+import React, {useEffect, useMemo, useRef} from 'react';
+import {StyleSheet, useWindowDimensions, Animated} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {ActivityIndicator, Text, AnimatedFAB} from 'react-native-paper';
+import {ActivityIndicator, Text, FAB} from 'react-native-paper';
 import {FlashList} from '@shopify/flash-list';
 
 import useCategeryAllMovies from '../../hooks/services/useCategeryAllMovies';
@@ -14,18 +9,16 @@ import {ScreenProps} from '../../navigators/StackNavigator';
 import useRenderItem from '../../hooks/flatLIst/useRenderItem';
 import {PaperTheme} from '../../theme/theme';
 
-type OnScrollEventHandler = (
-  event: NativeSyntheticEvent<NativeScrollEvent>,
-) => void;
-
 const CategoryAllMovies: React.FC<ScreenProps<'CategoryAllMovies'>> = ({
   route,
   navigation,
 }) => {
   const {keyName, title} = route.params;
   const {height} = useWindowDimensions();
-  const [visible, setVisible] = useState(false);
+
   const flashListRef = useRef<FlashList<any>>(null);
+
+  const opacityValue = useRef(new Animated.Value(0)).current;
 
   const {
     data,
@@ -54,13 +47,16 @@ const CategoryAllMovies: React.FC<ScreenProps<'CategoryAllMovies'>> = ({
     }
   };
 
-  const handleScroll: OnScrollEventHandler = event => {
-    if (event.nativeEvent.contentOffset.y > height * 0.8) {
-      setVisible(true);
-    } else {
-      setVisible(false);
-    }
-  };
+  const handleScroll = Animated.event(
+    [{nativeEvent: {contentOffset: {y: opacityValue}}}],
+    {useNativeDriver: false},
+  );
+
+  const opacity = opacityValue.interpolate({
+    inputRange: [height * 0.6, height * 0.8],
+    outputRange: [0, 1],
+    extrapolate: 'clamp',
+  });
 
   const handleFabPress = () => {
     flashListRef.current?.scrollToIndex({animated: true, index: 0});
@@ -88,15 +84,10 @@ const CategoryAllMovies: React.FC<ScreenProps<'CategoryAllMovies'>> = ({
         keyExtractor={(movie, index) => `${movie.id.toString()}-${index}`}
       />
 
-      <AnimatedFAB
+      <FAB
         icon="arrow-up-thin"
-        label={'Label'}
-        extended={false}
         onPress={handleFabPress}
-        visible={visible}
-        animateFrom={'right'}
-        iconMode={'static'}
-        style={[styles.fab]}
+        style={{...styles.fab, opacity}}
       />
     </SafeAreaView>
   );
